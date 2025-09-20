@@ -37,7 +37,17 @@ sns.scatterplot(x=df[x_var], y=df[y_var], hue=df['label'], ax=ax2)
 st.pyplot(fig2)
 
 # --- Matriz de correlación ---
+# --- Matriz de correlación ---
 st.subheader("Matriz de correlación")
+
+# Seleccionar solo las columnas numéricas
+df_num = df.select_dtypes(include='number')
+
+# Calcular la correlación
+corr = df_num.corr()
+
+# Dibujar el heatmap
 fig3, ax3 = plt.subplots(figsize=(10, 8))
-sns.heatmap(df.corr(), annot=True, cmap="YlGnBu", ax=ax3)
+sns.heatmap(corr, annot=True, cmap="YlGnBu", ax=ax3, linewidths=0.5, vmin=-1, vmax=1)
+ax3.set_title("Matriz de correlación de variables numéricas")
 st.pyplot(fig3)
