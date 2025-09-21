@@ -1,3 +1,25 @@
+import streamlit as st
+import base64
+
+# --- Función para poner imagen de fondo ---
+def add_bg_from_local(image_file):
+    with open(image_file, "rb") as f:
+        data = f.read()
+    encoded = base64.b64encode(data).decode()
+    css = f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/jpg;base64,{encoded}");
+        background-size: cover;
+        background-attachment: fixed;
+    }}
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
+
+# --- Aquí le pasamos tu imagen ---
+add_bg_from_local("PLANTAS.jpg")  # o PLANTAS.png
+
 import pandas as pd
 import streamlit as st
 import seaborn as sns
@@ -51,3 +73,4 @@ fig3, ax3 = plt.subplots(figsize=(10, 8))
 sns.heatmap(corr, annot=True, cmap="YlGnBu", ax=ax3, linewidths=0.5, vmin=-1, vmax=1)
 ax3.set_title("Matriz de correlación de variables numéricas")
 st.pyplot(fig3)
+
