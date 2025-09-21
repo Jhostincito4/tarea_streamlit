@@ -1,13 +1,10 @@
-
 import pandas as pd
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 import base64
 
-import streamlit as st
-import base64
-
+# --- Fondo con imagen ---
 def add_bg_from_local(image_file):
     with open(image_file, "rb") as f:
         data = f.read()
@@ -23,36 +20,12 @@ def add_bg_from_local(image_file):
         background: url("data:image/jpg;base64,{encoded}") no-repeat center center fixed;
         background-size: cover;
     }}
-    .st-emotion-cache {{
-        background: url("data:image/jpg;base64,{encoded}") no-repeat center center fixed;
-        background-size: cover;
-    }}
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
 
-# Llama a la función
+# Llamada a la función
 add_bg_from_local("FONDOIMAGEN.jpg")
-
-
-# --- Función para poner una imagen de fondo ---
-def add_bg_from_local(image_file):
-    with open(image_file, "rb") as f:
-        data = f.read()
-    encoded = base64.b64encode(data).decode()
-
-    css = f"""
-    <style>
-    .stApp {{
-        background: url("data:image/jpg;base64,{encoded}") no-repeat center center fixed;
-        background-size: cover;
-    }}
-    </style>
-    """
-    st.markdown(css, unsafe_allow_html=True)
-
-# --- Llamada a la función con tu nueva imagen ---
-add_bg_from_local("FONDOIMAGEN.jpg")  # o .png si es ese el formato
 
 
 # --- Título de la app ---
@@ -89,16 +62,10 @@ sns.scatterplot(x=df[x_var], y=df[y_var], hue=df['label'], ax=ax2)
 st.pyplot(fig2)
 
 # --- Matriz de correlación ---
-# --- Matriz de correlación ---
 st.subheader("Matriz de correlación")
-
-# Seleccionar solo las columnas numéricas
 df_num = df.select_dtypes(include='number')
-
-# Calcular la correlación
 corr = df_num.corr()
 
-# Dibujar el heatmap
 fig3, ax3 = plt.subplots(figsize=(10, 8))
 sns.heatmap(corr, annot=True, cmap="YlGnBu", ax=ax3, linewidths=0.5, vmin=-1, vmax=1)
 ax3.set_title("Matriz de correlación de variables numéricas")
