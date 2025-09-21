@@ -4,28 +4,19 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import base64
 
-# --- Fondo con imagen ---
-def add_bg_from_local(image_file):
-    with open(image_file, "rb") as f:
-        data = f.read()
-    encoded = base64.b64encode(data).decode()
+import streamlit as st
 
-    css = f"""
-    <style>
-    .stApp {{
-        background: url("data:image/jpg;base64,{encoded}") no-repeat center center fixed;
-        background-size: cover;
-    }}
-    .stAppViewContainer {{
-        background: url("data:image/jpg;base64,{encoded}") no-repeat center center fixed;
-        background-size: cover;
-    }}
-    </style>
-    """
-    st.markdown(css, unsafe_allow_html=True)
+page_bg = """
+<style>
+.stApp {
+    background-image: url("https://raw.githubusercontent.com/Jhostincito4/tarea_streamlit/refs/heads/main/FONDOIMAGEN.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+</style>
+"""
+st.markdown(page_bg, unsafe_allow_html=True)
 
-# Llamada a la función
-add_bg_from_local("FONDOIMAGEN.jpg")
 
 
 # --- Título de la app ---
@@ -70,6 +61,7 @@ fig3, ax3 = plt.subplots(figsize=(10, 8))
 sns.heatmap(corr, annot=True, cmap="YlGnBu", ax=ax3, linewidths=0.5, vmin=-1, vmax=1)
 ax3.set_title("Matriz de correlación de variables numéricas")
 st.pyplot(fig3)
+
 
 
 
