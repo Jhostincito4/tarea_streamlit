@@ -4,21 +4,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import base64
 
-import streamlit as st
-
-page_bg = """
-<style>
-.stApp {
-    background-image: url("https://raw.githubusercontent.com/Jhostincito4/tarea_streamlit/refs/heads/main/FONDOIMAGEN.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-}
-</style>
-"""
-st.markdown(page_bg, unsafe_allow_html=True)
-
-
-
 # --- Título de la app ---
 st.title("Análisis Exploratorio de Cultivos 🌱")
 st.write("Explora cómo las condiciones del suelo y clima afectan el tipo de cultivo recomendado.")
@@ -61,6 +46,7 @@ fig3, ax3 = plt.subplots(figsize=(10, 8))
 sns.heatmap(corr, annot=True, cmap="YlGnBu", ax=ax3, linewidths=0.5, vmin=-1, vmax=1)
 ax3.set_title("Matriz de correlación de variables numéricas")
 st.pyplot(fig3)
+
 
 
 
